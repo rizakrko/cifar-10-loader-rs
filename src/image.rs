@@ -3,12 +3,7 @@ extern crate itertools;
 extern crate rand;
 extern crate walkdir;
 
-pub struct CifarImage {
-    pub label: u8,
-    pub image: image::DynamicImage,
-}
-
-impl CifarImage {
+impl super::image_pub::CifarImage {
     pub fn new(bytes: &[u8]) -> Result<Self, ::std::io::Error> {
         use std::io::Read;
         use std::mem;
@@ -41,7 +36,7 @@ impl CifarImage {
             });
             img
         };
-        Ok(CifarImage {
+        Ok(super::image_pub::CifarImage {
             label: label,
             image: img,
         })

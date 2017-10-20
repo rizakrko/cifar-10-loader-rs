@@ -9,8 +9,8 @@ pub struct CifarDataset {
     pub labels: Vec<String>,
     pub train_count: usize,
     pub test_count: usize,
-    pub train_dataset: Vec<::image::CifarImage>,
-    pub test_dataset: Vec<::image::CifarImage>,
+    pub train_dataset: Vec<super::image_pub::CifarImage>,
+    pub test_dataset: Vec<super::image_pub::CifarImage>,
 }
 
 struct CifarFilePaths {
@@ -162,19 +162,19 @@ impl CifarDataset {
     }
     fn get_images(
         byte_datas: Vec<Vec<u8>>,
-    ) -> Result<Vec<super::image::CifarImage>, ::std::io::Error> {
+    ) -> Result<Vec<super::image_pub::CifarImage>, ::std::io::Error> {
         use self::rayon::prelude::*;
         byte_datas
             .into_par_iter()
-            .map(|byte_img| super::image::CifarImage::new(&byte_img))
-            .collect::<Result<Vec<super::image::CifarImage>, ::std::io::Error>>()
+            .map(|byte_img| super::image_pub::CifarImage::new(&byte_img))
+            .collect::<Result<Vec<super::image_pub::CifarImage>, ::std::io::Error>>()
     }
     fn for_test_get_image_from_train_save(&self, rng: &mut rand::ThreadRng) -> Result<(), String> {
         use self::rand::Rng;
         let fout = &mut ::std::fs::File::create(&::std::path::Path::new("train.jpeg"))
             .map_err(|err| err.to_string())?;
         let nth: &usize = &rng.gen_range(0, self.train_count);
-        let data: &super::image::CifarImage = &self.train_dataset[*nth];
+        let data: &super::image_pub::CifarImage = &self.train_dataset[*nth];
         data.image
             .resize(500, 500, image::FilterType::Lanczos3)
             .save(fout, image::JPEG)
@@ -187,7 +187,7 @@ impl CifarDataset {
         let fout = &mut ::std::fs::File::create(&::std::path::Path::new("test.jpeg"))
             .map_err(|err| err.to_string())?;
         let nth: &usize = &rng.gen_range(0, self.test_count);
-        let data: &super::image::CifarImage = &self.test_dataset[*nth];
+        let data: &super::image_pub::CifarImage = &self.test_dataset[*nth];
         data.image
             .resize(500, 500, image::FilterType::Lanczos3)
             .save(fout, image::JPEG)
