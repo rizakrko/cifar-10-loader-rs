@@ -166,7 +166,10 @@ impl CifarDataset {
         use self::rayon::prelude::*;
         byte_datas
             .into_par_iter()
-            .map(|byte_img| super::image_pub::CifarImage::new(&byte_img))
+            .map(|byte_img| {
+                use super::image::CifarImageTrait;
+                super::image_pub::CifarImage::new(&byte_img)
+            })
             .collect::<Result<Vec<super::image_pub::CifarImage>, ::std::io::Error>>()
     }
     fn for_test_get_image_from_train_save(&self, rng: &mut rand::ThreadRng) -> Result<(), String> {

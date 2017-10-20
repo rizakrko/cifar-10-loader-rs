@@ -3,8 +3,12 @@ extern crate itertools;
 extern crate rand;
 extern crate walkdir;
 
-impl super::image_pub::CifarImage {
-    pub fn new(bytes: &[u8]) -> Result<Self, ::std::io::Error> {
+pub trait CifarImageTrait {
+    fn new(bytes: &[u8]) -> Result<super::image_pub::CifarImage, ::std::io::Error>;
+}
+
+impl CifarImageTrait for super::image_pub::CifarImage {
+    fn new(bytes: &[u8]) -> Result<Self, ::std::io::Error> {
         use std::io::Read;
         use std::mem;
         use self::image::GenericImage;
