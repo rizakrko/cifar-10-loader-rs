@@ -3,7 +3,7 @@ extern crate itertools;
 extern crate rand;
 extern crate walkdir;
 
-pub trait CifarImageTrait {
+pub(crate) trait CifarImageTrait {
     fn new(bytes: &[u8]) -> Result<super::image_pub::CifarImage, ::std::io::Error>;
 }
 
