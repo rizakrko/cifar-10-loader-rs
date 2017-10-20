@@ -2,6 +2,10 @@
 authors = ["29rou <g196010r@icu.ac.jp>"]
 name = "cifar_10_loader"
 version = "0.1.0"
+license-file = "LICENSE"
+readme = "README.md"
+repository = "https://github.com/29rou/cifar-10-loader-rs"
+description = "Crate of loading cifar10"
 
 [dependencies]
 image = "0.17.0"
