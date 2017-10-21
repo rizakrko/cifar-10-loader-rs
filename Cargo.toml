@@ -1,5 +1,5 @@
 [package]
-authors = ["29rou <g196010r@icu.ac.jp>"]
+authors = ["Sakamoto Yoshiki <g196010r@icu.ac.jp>"]
 name = "cifar_10_loader"
 version = "0.1.0"
 license-file = "LICENSE"
