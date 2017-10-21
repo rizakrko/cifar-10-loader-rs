@@ -1,7 +1,7 @@
 [package]
 authors = ["Sakamoto Yoshiki <g196010r@icu.ac.jp>"]
 name = "cifar_10_loader"
-version = "0.1.0"
+version = "0.1.1"
 license-file = "LICENSE"
 readme = "README.md"
 repository = "https://github.com/29rou/cifar-10-loader-rs"
