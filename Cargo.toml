@@ -1,8 +1,9 @@
 [package]
 authors = ["Sakamoto Yoshiki <g196010r@icu.ac.jp>"]
 name = "cifar_10_loader"
-version = "0.1.11"
+version = "0.1.12"
 license = "MIT"
+description = "Simple Cifar10 Loader"
 repository = "https://github.com/29rou/cifar-10-loader-rs"
 description = "Crate of loading cifar10"
 documentation =  "https://29rou.github.io/cifar-10-loader-rs/"
