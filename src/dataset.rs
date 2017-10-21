@@ -5,22 +5,38 @@ extern crate rayon;
 extern crate regex;
 extern crate walkdir;
 
-
+///CifarDataset is Top Leve Struct of cifar_10_loader.
+///
+///CifarDataset include labels of Cifar10, train_datas, test_datas and theier count.
+///
 pub struct CifarDataset {
+    ///Cifar10 lables.
+    ///
+    /// ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
     pub labels: Vec<String>,
+    /// Count of tarin datas.
+    ///
+    /// 50000 datas
     pub train_count: usize,
+    /// Count of test datas.
+    ///
+    /// 10000 datas
     pub test_count: usize,
+    /// Dataset for train.
     pub train_dataset: Vec<super::CifarImage>,
+    /// Dataset for test.
     pub test_dataset: Vec<super::CifarImage>,
 }
-
+///For inner use struct
 struct CifarFilePaths {
     meta_data_paths: Vec<::std::path::PathBuf>,
     train_data_paths: Vec<::std::path::PathBuf>,
     test_data_paths: Vec<::std::path::PathBuf>,
 }
 
+
 impl CifarDataset {
+    ///Creates a new CifarDataset.
     pub fn new<P: AsRef<::std::path::Path>>(path: P) -> Result<Self, String> {
         use std::thread::spawn;
         let CifarFilePaths {
