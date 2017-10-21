@@ -1,12 +1,12 @@
 [package]
 authors = ["Sakamoto Yoshiki <g196010r@icu.ac.jp>"]
-name = "cifar_10_loader"
-version = "0.1.12"
+description = "Crate of loading cifar10"
+documentation = "https://29rou.github.io/cifar-10-loader-rs/"
 license = "MIT"
+name = "cifar_10_loader"
 readme = "README.md"
 repository = "https://github.com/29rou/cifar-10-loader-rs"
-description = "Crate of loading cifar10"
-documentation =  "https://29rou.github.io/cifar-10-loader-rs/"
+version = "0.1.13"
 
 [dependencies]
 image = "0.17.0"
@@ -14,5 +14,4 @@ itertools = "0.7.1"
 rand = "0.3.17"
 rayon = "0.8.2"
 regex = "0.2.2"
-walkdir = "1.0.7"
-
+walkdir = "2.0.0"
