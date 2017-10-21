@@ -1,10 +1,10 @@
 # cifar-10-loader-rs
 Crate of loading cifar10 implemented by Rust
 
-# Load Cifar10
+## Load Cifar10
 Cifar10 Simple Loader
 
-##Examples
+## Examples
 
 Download CIFAR-10 binary version and extact.
 ```
