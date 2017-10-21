@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["CifarDataset","CifarDataset is Top Leve Struct of cifar_10_loader."],["CifarImage","CifarImage is inner Struct of CifarDataset."]]});
