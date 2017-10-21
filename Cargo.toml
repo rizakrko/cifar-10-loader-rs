@@ -6,6 +6,7 @@ license-file = "LICENSE"
 readme = "README.md"
 repository = "https://github.com/29rou/cifar-10-loader-rs"
 description = "Crate of loading cifar10"
+documentation =  https://29rou.github.io/cifar-10-loader-rs/
 
 [dependencies]
 image = "0.17.0"
