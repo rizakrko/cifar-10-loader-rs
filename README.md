@@ -4,6 +4,8 @@ Crate of loading cifar10 implemented by Rust
 ## Load Cifar10
 Cifar10 Simple Loader
 
+[Documentation]("https://29rou.github.io/cifar-10-loader-rs/")
+
 ## Examples
 
 Download CIFAR-10 binary version and extact.
