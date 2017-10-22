@@ -3,7 +3,7 @@
 //!
 //!Cifar10 Simple Loader
 //!
-//!Use [image](https://crates.io/crates/image) crate in CifarImage.
+//!Use image crate in CifarImage.
 //!
 //!##Examples
 //!

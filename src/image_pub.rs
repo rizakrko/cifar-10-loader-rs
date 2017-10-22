@@ -7,6 +7,6 @@ pub struct CifarImage {
     pub label: u8,
     ///32x32 RGB image.
     ///
-    ///[DynamicImage](https://docs.rs/image/0.17.0/image/enum.DynamicImage.html) is in [image](https://docs.rs/image/0.17.0/image/) crate.
+    ///DynamicImage is in imagecrate.
     pub image: self::image::DynamicImage,
 }
