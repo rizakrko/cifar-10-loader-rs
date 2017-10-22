@@ -10,7 +10,7 @@ Cifar10 Simple Loader
 
 ## Examples
 
-Download CIFAR-10 binary version and extact.
+Download CIFAR-10 binary version and extract.
 ```
 extern crate cifar_10_loader;
 use cifar_10_loader::CifarDataset;
