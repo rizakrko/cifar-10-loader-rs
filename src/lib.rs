@@ -3,6 +3,8 @@
 //!
 //!Cifar10 Simple Loader
 //!
+//!Using [image](https://crates.io/crates/image) crate in CifarImage.
+//!
 //!##Examples
 //!
 //! Download CIFAR-10 binary version and extact.
@@ -16,6 +18,9 @@
 //!let cifar10_path = "./cifar-10-batches-bin/";
 //!let cifar_dataset = CifarDataset::new(cifar10_path).unwrap();
 //!```
+//!
+//!
+
 pub extern crate image;
 
 pub use self::image_pub::CifarImage;
