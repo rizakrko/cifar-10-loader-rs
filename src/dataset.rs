@@ -14,7 +14,7 @@ pub struct CifarDataset {
     ///
     /// ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
     pub labels: Vec<String>,
-    /// Count of tarin datas.
+    /// Count of training datas.
     ///
     /// 50000 datas
     pub train_count: usize,
@@ -22,7 +22,7 @@ pub struct CifarDataset {
     ///
     /// 10000 datas
     pub test_count: usize,
-    /// Dataset for train.
+    /// Dataset for training.
     pub train_dataset: Vec<super::CifarImage>,
     /// Dataset for test.
     pub test_dataset: Vec<super::CifarImage>,
