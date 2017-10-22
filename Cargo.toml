@@ -6,7 +6,7 @@ license = "MIT"
 name = "cifar_10_loader"
 readme = "README.md"
 repository = "https://github.com/29rou/cifar-10-loader-rs"
-version = "0.1.15"
+version = "0.1.16"
 
 [lib]
 name = "cifar_10_loader"
