@@ -5,6 +5,7 @@ Crate of loading cifar10 implemented by Rust
 Cifar10 Simple Loader
 
 [Documentation](https://docs.rs/cifar_10_loader/)
+
 [crates.io](https://crates.io/crates/cifar_10_loader)
 
 ## Examples

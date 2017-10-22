@@ -3,7 +3,7 @@
 //!
 //!Cifar10 Simple Loader
 //!
-//!Using [image](https://crates.io/crates/image) crate in CifarImage.
+//!Use [image](https://crates.io/crates/image) crate in CifarImage.
 //!
 //!##Examples
 //!
@@ -20,8 +20,6 @@
 //!```
 //!
 //!
-
-pub extern crate image;
 
 pub use self::image_pub::CifarImage;
 pub use self::dataset::CifarDataset;

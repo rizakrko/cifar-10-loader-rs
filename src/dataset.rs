@@ -5,9 +5,9 @@ extern crate rayon;
 extern crate regex;
 extern crate walkdir;
 
-///CifarDataset is Top Leve Struct of cifar_10_loader.
+///CifarDataset is Top Level Struct of cifar_10_loader.
 ///
-///CifarDataset include labels of Cifar10, train_datas, test_datas and theier count.
+///CifarDataset include labels of Cifar10, train_datas, test_datas and their count.
 ///
 pub struct CifarDataset {
     ///Cifar10 lables.
