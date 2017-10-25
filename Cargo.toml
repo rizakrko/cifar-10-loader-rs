@@ -6,11 +6,9 @@ license = "MIT"
 name = "cifar_10_loader"
 readme = "README.md"
 repository = "https://github.com/29rou/cifar-10-loader-rs"
-version = "0.1.17"
+version = "0.1.18"
 
 [dependencies]
-rand = "0.3.17"
-rayon = "0.8.2"
 regex = "0.2.2"
 walkdir = "2.0.1"
 
@@ -23,9 +21,43 @@ default-features = false
 version = "0.17.0"
 
 [dependencies.itertools]
-default-features = false
 version = "0.7.1"
 
+[dependencies.rayon]
+optional = true
+version = "0.8.2"
+
+[dev-dependencies]
+curl = "0.4.8"
+find_folder = "0.3.0"
+image = "0.17.0"
+rand = "0.3.18"
+
+[features]
+benchmarks = ["image/benchmarks"]
+bmp = ["image/bmp"]
+default = [
+    "rayon",
+    "gif_codec",
+    "jpeg",
+    "ico",
+    "png_codec",
+    "ppm",
+    "tga",
+    "tiff",
+    "webp",
+    "bmp",
+    "hdr",
+]
+gif_codec = ["image/gif_codec"]
+hdr = ["image/hdr"]
+ico = ["image/ico"]
+jpeg = ["image/jpeg"]
+png_codec = ["image/png"]
+ppm = ["image/ppm"]
+tga = ["image/tga"]
+tiff = ["image/tiff"]
+webp = ["image/webp"]
 
 [lib]
 name = "cifar_10_loader"

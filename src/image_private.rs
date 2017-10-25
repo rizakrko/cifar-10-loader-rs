@@ -1,6 +1,5 @@
 extern crate image;
 extern crate itertools;
-extern crate rand;
 extern crate walkdir;
 
 pub(crate) trait CifarImageTrait {

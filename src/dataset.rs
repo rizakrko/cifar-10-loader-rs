@@ -1,10 +1,9 @@
-extern crate image;
 extern crate itertools;
-extern crate rand;
-extern crate rayon;
 extern crate regex;
 extern crate walkdir;
 
+#[cfg(feature = "rayon")]
+extern crate rayon;
 ///CifarDataset is Top Level Struct of cifar_10_loader.
 ///
 ///CifarDataset include labels of Cifar10, train_datas, test_datas and their count.
@@ -86,6 +85,7 @@ impl CifarDataset {
         };
         Ok(cifar_file_paths)
     }
+    #[cfg(feature = "rayon")]
     fn get_meta_data_paths(
         paths: &[::std::path::PathBuf],
     ) -> Result<Vec<::std::path::PathBuf>, String> {
@@ -107,6 +107,28 @@ impl CifarDataset {
             Ok(fpaths)
         }
     }
+    #[cfg(not(feature = "rayon"))]
+    fn get_meta_data_paths(
+        paths: &[::std::path::PathBuf],
+    ) -> Result<Vec<::std::path::PathBuf>, String> {
+        use std::path::{Path, PathBuf};
+        let meta_data_file_name = Path::new("batches.meta.txt");
+        let fpaths: Vec<PathBuf> = paths
+            .into_iter()
+            .filter(|path| {
+                path.file_name()
+                    .map(|file_name| file_name == meta_data_file_name)
+                    .unwrap_or(false)
+            })
+            .cloned()
+            .collect();
+        if fpaths.is_empty() {
+            Err("Can't Find Meta Data Files!!".to_string())
+        } else {
+            Ok(fpaths)
+        }
+    }
+    #[cfg(feature = "rayon")]
     fn get_paths_regex(
         paths: &[::std::path::PathBuf],
         re: &self::regex::Regex,
@@ -115,6 +137,30 @@ impl CifarDataset {
         use std::path::PathBuf;
         let fpaths: Vec<PathBuf> = paths
             .par_iter()
+            .filter(|path| {
+                path.file_name()
+                    .map(|file_name| {
+                        let file_name = file_name.to_string_lossy();
+                        re.is_match(file_name.as_ref())
+                    })
+                    .unwrap_or(false)
+            })
+            .cloned()
+            .collect();
+        if fpaths.is_empty() {
+            Err("Can't Find Train Data Files!!".to_string())
+        } else {
+            Ok(fpaths)
+        }
+    }
+    #[cfg(not(feature = "rayon"))]
+    fn get_paths_regex(
+        paths: &[::std::path::PathBuf],
+        re: &self::regex::Regex,
+    ) -> Result<Vec<::std::path::PathBuf>, String> {
+        use std::path::PathBuf;
+        let fpaths: Vec<PathBuf> = paths
+            .iter()
             .filter(|path| {
                 path.file_name()
                     .map(|file_name| {
@@ -152,6 +198,7 @@ impl CifarDataset {
             .collect::<Result<Vec<Vec<String>>, ::std::io::Error>>()
             .map(|v| v.concat())
     }
+    #[cfg(feature = "rayon")]
     fn get_byte_datas(paths: &[::std::path::PathBuf]) -> Result<Vec<Vec<u8>>, ::std::io::Error> {
         use std::io::{BufReader, Read};
         use self::rayon::prelude::*;
@@ -175,10 +222,44 @@ impl CifarDataset {
             .collect::<Result<Vec<Vec<Vec<u8>>>, ::std::io::Error>>()
             .map(|v| v.concat())
     }
+    #[cfg(not(feature = "rayon"))]
+    fn get_byte_datas(paths: &[::std::path::PathBuf]) -> Result<Vec<Vec<u8>>, ::std::io::Error> {
+        use std::io::{BufReader, Read};
+        paths
+            .iter()
+            .map(|file_path| -> Result<Vec<u8>, ::std::io::Error> {
+                ::std::fs::File::open(file_path).and_then(|file| {
+                    let mut byte_data: Vec<u8> = Vec::new();
+                    BufReader::new(file)
+                        .read_to_end(&mut byte_data)
+                        .map(|_| byte_data)
+                })
+            })
+            .map(|byte_data| -> Result<Vec<Vec<u8>>, ::std::io::Error> {
+                byte_data.map(|b| -> Vec<Vec<u8>> {
+                    b.chunks(3073)
+                        .map(|byte_img| -> Vec<u8> { byte_img.to_vec() })
+                        .collect()
+                })
+            })
+            .collect::<Result<Vec<Vec<Vec<u8>>>, ::std::io::Error>>()
+            .map(|v| v.concat())
+    }
+    #[cfg(feature = "rayon")]
     fn get_images(byte_datas: Vec<Vec<u8>>) -> Result<Vec<super::CifarImage>, ::std::io::Error> {
         use self::rayon::prelude::*;
         byte_datas
             .into_par_iter()
+            .map(|byte_img| {
+                use super::CifarImageTrait;
+                super::CifarImage::new(&byte_img)
+            })
+            .collect::<Result<Vec<super::CifarImage>, ::std::io::Error>>()
+    }
+    #[cfg(not(feature = "rayon"))]
+    fn get_images(byte_datas: Vec<Vec<u8>>) -> Result<Vec<super::CifarImage>, ::std::io::Error> {
+        byte_datas
+            .into_iter()
             .map(|byte_img| {
                 use super::CifarImageTrait;
                 super::CifarImage::new(&byte_img)
