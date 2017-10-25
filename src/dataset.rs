@@ -133,7 +133,6 @@ impl CifarDataset {
     }
     fn get_meta_data(paths: &[::std::path::PathBuf]) -> Result<Vec<String>, ::std::io::Error> {
         use std::io::Read;
-        use self::itertools::Itertools;
         paths
             .iter()
             .map(|meta_path| -> Result<String, ::std::io::Error> {
@@ -147,7 +146,7 @@ impl CifarDataset {
                     l.lines()
                         .filter(|x| !x.is_empty())
                         .map(|x| x.into())
-                        .collect_vec()
+                        .collect()
                 })
             })
             .collect::<Result<Vec<Vec<String>>, ::std::io::Error>>()
@@ -155,7 +154,6 @@ impl CifarDataset {
     }
     fn get_byte_datas(paths: &[::std::path::PathBuf]) -> Result<Vec<Vec<u8>>, ::std::io::Error> {
         use std::io::{BufReader, Read};
-        use self::itertools::Itertools;
         use self::rayon::prelude::*;
         paths
             .par_iter()
@@ -171,7 +169,7 @@ impl CifarDataset {
                 byte_data.map(|b| -> Vec<Vec<u8>> {
                     b.chunks(3073)
                         .map(|byte_img| -> Vec<u8> { byte_img.to_vec() })
-                        .collect_vec()
+                        .collect()
                 })
             })
             .collect::<Result<Vec<Vec<Vec<u8>>>, ::std::io::Error>>()
