@@ -1,3 +1,8 @@
 /target/
 **/*.rs.bk
 Cargo.lock
+cifar-10-batches-bin
+*.jpg
+*.jpeg
+*.png
+.tar.gz
