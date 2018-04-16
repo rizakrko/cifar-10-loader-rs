@@ -6,58 +6,33 @@ license = "MIT"
 name = "cifar_10_loader"
 readme = "README.md"
 repository = "https://github.com/29rou/cifar-10-loader-rs"
-version = "0.2.0"
+version = "0.2.1"
 
 [dependencies]
-itertools = "0.7.1"
-regex = "0.2.2"
-walkdir = "2.0.1"
-rand = "0.4.1"
-
-[dependencies.clippy]
-optional = true
-version = "0.0.176"
+itertools = "*"
+regex = "*"
+walkdir = "*"
+rand = "0.5.0-pre.0"
 
 [dependencies.image]
 default-features = false
-version = "0.18.0"
+version = "*"
 
 [dependencies.rayon]
 optional = true
-version = "0.9.0"
+version = "*"
 
 [dev-dependencies]
-curl = "0.4.8"
-find_folder = "0.3.0"
-image = "0.18.0"
-rand = "0.4.1"
+curl = "*"
+find_folder = "*"
+image = "*"
+rand = "0.5.0-pre.0"
 
 [features]
 benchmarks = ["image/benchmarks"]
-bmp = ["image/bmp"]
 default = [
     "rayon",
-    "gif_codec",
-    "jpeg",
-    "ico",
-    "png_codec",
-    "ppm",
-    "tga",
-    "tiff",
-    "webp",
-    "bmp",
-    "hdr",
 ]
-gif_codec = ["image/gif_codec"]
-hdr = ["image/hdr"]
-ico = ["image/ico"]
-jpeg = ["image/jpeg"]
-png_codec = ["image/png"]
-ppm = ["image/ppm"]
-tga = ["image/tga"]
-tiff = ["image/tiff"]
-webp = ["image/webp"]
-
 [lib]
 name = "cifar_10_loader"
 path = "./src/lib.rs"
