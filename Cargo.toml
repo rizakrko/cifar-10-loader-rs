@@ -12,7 +12,7 @@ version = "0.2.1"
 itertools = "*"
 regex = "*"
 walkdir = "*"
-rand = "0.5.0-pre.0"
+rand = "0.4"
 
 [dependencies.image]
 default-features = false
@@ -26,7 +26,7 @@ version = "*"
 curl = "*"
 find_folder = "*"
 image = "*"
-rand = "0.5.0-pre.0"
+rand = "0.4"
 
 [features]
 benchmarks = ["image/benchmarks"]
