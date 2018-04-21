@@ -12,11 +12,11 @@ version = "0.2.1"
 itertools = "*"
 regex = "*"
 walkdir = "*"
-rand = "0.4"
+rand = { git = "https://github.com/rust-lang-nursery/rand"}
 
 [dependencies.image]
+git = "https://github.com/PistonDevelopers/image"
 default-features = false
-version = "*"
 
 [dependencies.rayon]
 optional = true
@@ -25,8 +25,8 @@ version = "*"
 [dev-dependencies]
 curl = "*"
 find_folder = "*"
-image = "*"
-rand = "0.4"
+image = {git = "https://github.com/PistonDevelopers/image"}
+rand = { git = "https://github.com/rust-lang-nursery/rand"}
 
 [features]
 benchmarks = ["image/benchmarks"]

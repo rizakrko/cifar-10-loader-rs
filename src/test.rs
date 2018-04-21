@@ -26,9 +26,9 @@ fn get_cifar_10() -> ::std::path::PathBuf {
 }
 fn download_cifar_10() -> ::std::path::PathBuf {
     let path = "./cifar-10-binary.tar.gz";
+    use self::curl::easy::Easy;
     use std::fs;
     use std::io::{BufWriter, Write};
-    use self::curl::easy::Easy;
     let mut easy = Easy::new();
     let mut file = BufWriter::new(fs::File::create(path).unwrap());
     easy.url("https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz")
@@ -46,7 +46,7 @@ fn extract_cifar_10(path: ::std::path::PathBuf) -> ::std::path::PathBuf {
     } else {
         Command::new("sh")
             .arg("-c")
-            .arg(("tar xf ".to_string() + path))
+            .arg("tar xf ".to_string() + path)
             .output()
             .unwrap();
     };
@@ -63,12 +63,11 @@ fn for_test_get_image_from_train_save(
     let data: &super::CifarImage = &data_set.train_dataset[*nth];
     data.image
         .resize(500, 500, image::FilterType::Lanczos3)
-        .save(fout, image::JPEG)
+        .write_to(fout, image::JPEG)
         .map_err(|err| err.to_string())?;
     println!(
         "From Train No.{} {}",
-        nth,
-        data_set.labels[data.label as usize]
+        nth, data_set.labels[data.label as usize]
     );
     Ok(())
 }
@@ -83,12 +82,11 @@ fn for_test_get_image_from_test_save(
     let data: &super::CifarImage = &data_set.test_dataset[*nth];
     data.image
         .resize(500, 500, image::FilterType::Lanczos3)
-        .save(fout, image::JPEG)
+        .write_to(fout, image::JPEG)
         .map_err(|err| err.to_string())?;
     println!(
         "From test No.{} {}",
-        nth,
-        data_set.labels[data.label as usize]
+        nth, data_set.labels[data.label as usize]
     );
     Ok(())
 }
@@ -106,25 +104,19 @@ fn test_load_data(data_set: &super::CifarDataset) {
         "truck",
     ];
     assert_eq!(
-        labels,
-        data_set.labels,
+        labels, data_set.labels,
         "we are testing labels loaded properly.\n expect:{:?} \n result {:?}",
-        labels,
-        data_set.labels
+        labels, data_set.labels
     );
     assert_eq!(
-        10_000,
-        data_set.test_count,
+        10_000, data_set.test_count,
         "we are testing test_data loaded properly.\n expect_count:{} \n result_count {:?}",
-        10_000,
-        data_set.test_count
+        10_000, data_set.test_count
     );
     assert_eq!(
-        50_000,
-        data_set.train_count,
+        50_000, data_set.train_count,
         "we are testing train_data loaded properly.\n expect_count:{} \n result_count {:?}",
-        50_000,
-        data_set.train_count
+        50_000, data_set.train_count
     );
 }
 fn test_output(data_set: &super::CifarDataset, rng: &mut rand::ThreadRng) -> Result<(), String> {
